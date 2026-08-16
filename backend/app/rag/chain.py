@@ -7,8 +7,11 @@ from app.rag.retriever import get_retriever
 # validation import 
 from app.schemas.chat import ChatResponse, Source
 
-def get_rag_chain():
-    retriever = get_retriever(k=4)
+def get_rag_chain(document_id: str):
+    retriever = get_retriever(
+        document_id=document_id,
+        k=4,
+    )
 
     llm = ChatGoogleGenerativeAI(
         model="gemini-3.6-flash",
@@ -17,9 +20,8 @@ def get_rag_chain():
 
     return retriever, llm
 
-
-def ask_question(question: str):
-    retriever, llm = get_rag_chain()
+def ask_question(question: str, document_id: str,)-> ChatResponse:
+    retriever, llm = get_rag_chain(document_id)
 
     documents = retriever.invoke(question)
 

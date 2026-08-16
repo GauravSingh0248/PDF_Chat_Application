@@ -2,6 +2,12 @@ from pydantic import BaseModel, Field
 
 
 class ChatRequest(BaseModel):
+    document_id: str = Field(
+        ...,
+        description="document id-from which pdf the question relates",
+        examples={'a7c91e25-5b3a-4c91-9f21-123456789abc'},
+        min_length=1,
+    ),
     question: str = Field(
         ...,
         title='User Question',

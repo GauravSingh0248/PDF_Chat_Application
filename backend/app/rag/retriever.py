@@ -20,14 +20,19 @@ def get_vector_store():
     return vector_store
 
 
-def get_retriever(k: int = 4):
-    """Create a retriever from the vector store."""
+def get_retriever(document_id: str, k: int = 4):
+    """Create a retriever for a specific document."""
 
     vector_store = get_vector_store()
 
     retriever = vector_store.as_retriever(
         search_type="similarity",
-        search_kwargs={"k": k},
+        search_kwargs={
+            "k": k,
+            "filter": {
+                "document_id": document_id
+            },
+        },
     )
 
     return retriever
