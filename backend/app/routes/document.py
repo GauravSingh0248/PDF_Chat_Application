@@ -1,8 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 
-from app.schemas.document import DocumentResponse
+from app.schemas.document import DocumentResponse, DocumentListResponse
 from app.services.document_service import process_document
-
+from app.database.document_repository import get_all_documents
 
 router = APIRouter(
     prefix="/api/documents",
@@ -26,3 +26,13 @@ async def upload_document(file: UploadFile = File(...)):
         )
 
     return process_document(file)
+
+
+@router.get("", response_model=DocumentListResponse)
+def get_documents():
+    documents = get_all_documents()
+
+    return DocumentListResponse(
+        documents=documents
+    )
+

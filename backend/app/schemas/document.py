@@ -1,7 +1,39 @@
+from datetime import datetime
+
 from pydantic import BaseModel, Field
-from typing import Annotated, Literal, Optional
+
 
 class DocumentResponse(BaseModel):
-    document_id: Annotated[str, Field(..., description='ID of the Document', examples=['P001'])]
-    filename: Annotated[str, Field(..., description='File/document Name', examples=['abc.pdf'])]
-    status: Annotated[str, Field(..., description='Document Processed or NOT', examples=['not_processed'])]
+    document_id: str = Field(
+        ...,
+        title="Document ID",
+        description="Unique identifier of the uploaded PDF",
+        examples=["a7c91e25-5b3a-4c91-9f21-123456789abc"],
+        min_length=1,
+    )
+
+    filename: str = Field(
+        ...,
+        title="Filename",
+        description="Original name of the uploaded PDF",
+        examples=["Machine_Learning.pdf"],
+        min_length=1,
+    )
+
+    status: str = Field(
+        ...,
+        title="Processing Status",
+        description="Current processing status of the document",
+        examples=["processed"],
+        min_length=1,
+    )
+
+    created_at: datetime = Field(
+        ...,
+        title="Created At",
+        description="Date and time when the document was uploaded",
+    )
+
+
+class DocumentListResponse(BaseModel):
+    documents: list[DocumentResponse]
