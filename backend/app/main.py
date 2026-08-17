@@ -10,6 +10,8 @@ from app.core.exception_handlers import (
     global_exception_handler,
 )
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="PDF Chat API",
     description="RAG-based PDF chat application",
@@ -42,3 +44,14 @@ def health_check():
     return {
         "status": "healthy"
     }
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
