@@ -3,6 +3,12 @@ from fastapi import FastAPI
 from app.routes.chat import router as chat_router
 from app.routes.document import router as document_router
 
+from app.core.exceptions import AppException
+
+from app.core.exception_handlers import (
+    app_exception_handler,
+    global_exception_handler,
+)
 
 app = FastAPI(
     title="PDF Chat API",
@@ -12,6 +18,16 @@ app = FastAPI(
 
 app.include_router(chat_router)
 app.include_router(document_router)
+
+app.add_exception_handler(
+    AppException,
+    app_exception_handler,
+)
+
+app.add_exception_handler(
+    Exception,
+    global_exception_handler,
+)
 
 
 @app.get("/")

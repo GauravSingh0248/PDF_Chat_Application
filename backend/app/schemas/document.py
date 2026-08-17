@@ -8,7 +8,7 @@ class DocumentResponse(BaseModel):
         ...,
         title="Document ID",
         description="Unique identifier of the uploaded PDF",
-        examples=["a7c91e25-5b3a-4c91-9f21-123456789abc"],
+        examples=["fbc121"],
         min_length=1,
     )
 
@@ -16,7 +16,7 @@ class DocumentResponse(BaseModel):
         ...,
         title="Filename",
         description="Original name of the uploaded PDF",
-        examples=["Machine_Learning.pdf"],
+        examples=["abc.pdf"],
         min_length=1,
     )
 

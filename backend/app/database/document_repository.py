@@ -1,5 +1,5 @@
 from app.database.mysql import get_mysql_connection
-from backend.app.rag.retriever import get_vector_store
+from app.rag.retriever import get_vector_store
 
 
 def create_document(document_id: str,filename: str,file_path: str,status: str,):

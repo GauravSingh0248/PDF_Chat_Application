@@ -62,11 +62,12 @@ def process_document(file):
             status="processed",
         )
 
-        return {
-            "document_id": document_id,
-            "filename": filename,
-            "status": "processed",
-        }
+        # return {
+        #     "document_id": document_id,
+        #     "filename": filename,
+        #     "status": "processed",
+        # }
+        return get_document(document_id)
 
     except Exception:
         # Processing failed

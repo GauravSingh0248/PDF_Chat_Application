@@ -1,6 +1,6 @@
 from langchain_chroma import Chroma
 from app.rag.embeddings import get_embedding_model
-from backend.app.rag.retriever import get_vector_store
+from app.rag.retriever import get_vector_store
 
 
 CHROMA_PATH = "data/chroma"
