@@ -1,8 +1,13 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 
 from app.schemas.document import DocumentResponse, DocumentListResponse
-from app.services.document_service import process_document
+# from app.services.document_service import process_document
 from app.database.document_repository import get_all_documents
+
+from app.services.document_service import (
+    process_document,
+    remove_document,
+)
 
 router = APIRouter(
     prefix="/api/documents",
@@ -35,4 +40,16 @@ def get_documents():
     return DocumentListResponse(
         documents=documents
     )
+
+@router.delete("/{document_id}", status_code=204)
+def delete_document(document_id: str):
+
+    document = remove_document(document_id)
+
+    if document is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found.",
+        )
+
 

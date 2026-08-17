@@ -1,5 +1,6 @@
 from langchain_chroma import Chroma
 from app.rag.embeddings import get_embedding_model
+from backend.app.rag.retriever import get_vector_store
 
 
 CHROMA_PATH = "data/chroma"
@@ -20,3 +21,14 @@ def create_vector_store(chunks):
     )
 
     return vector_store
+
+def delete_document(document_id: str):
+    """Delete all Chroma chunks belonging to a document."""
+
+    vector_store = get_vector_store()
+
+    vector_store._collection.delete(
+        where={
+            "document_id": document_id
+        }
+    )

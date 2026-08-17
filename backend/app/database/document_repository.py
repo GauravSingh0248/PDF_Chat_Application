@@ -1,4 +1,5 @@
 from app.database.mysql import get_mysql_connection
+from backend.app.rag.retriever import get_vector_store
 
 
 def create_document(document_id: str,filename: str,file_path: str,status: str,):
@@ -105,6 +106,29 @@ def get_all_documents():
         cursor.execute(query)
 
         return cursor.fetchall()
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+def delete_document(document_id: str):
+    connection = get_mysql_connection()
+
+    try:
+        cursor = connection.cursor()
+
+        query = """
+            DELETE FROM documents
+            WHERE document_id = %s
+        """
+
+        cursor.execute(
+            query,
+            (document_id,),
+        )
+
+        connection.commit()
 
     finally:
         cursor.close()

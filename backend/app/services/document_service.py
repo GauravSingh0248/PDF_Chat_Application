@@ -9,6 +9,12 @@ from app.rag.loader import load_pdf
 from app.rag.splitter import split_documents
 from app.rag.vector_store import create_vector_store
 
+from app.database.document_repository import (
+    delete_document as delete_document_record,
+    get_document,
+)
+
+from app.rag.vector_store import delete_document as delete_document_vectors
 
 UPLOAD_DIR = Path("data/uploads")
 
@@ -70,3 +76,25 @@ def process_document(file):
         )
 
         raise
+
+def remove_document(document_id: str):
+    """Remove a document and all associated data."""
+
+    document = get_document(document_id)
+
+    if document is None:
+        return None
+
+    file_path = Path(document["file_path"])
+
+    # Delete vectors from Chroma
+    delete_document_vectors(document_id)
+
+    # Delete the actual PDF
+    if file_path.exists():
+        file_path.unlink()
+
+    # Delete database record
+    delete_document_record(document_id)
+
+    return document
