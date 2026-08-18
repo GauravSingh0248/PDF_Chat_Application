@@ -117,3 +117,39 @@ class QuizSubmitResponse(BaseModel):
 # | `QuizSubmitRequest`  | **Here are my answers**                |
 # | `QuizResult`         | **Here is the result of one question** |
 # | `QuizSubmitResponse` | **Here is your complete score/result** |
+
+
+class GeneratedQuizQuestion(BaseModel):
+    question: str = Field(
+        ...,
+        description="The MCQ question",
+    )
+
+    options: list[str] = Field(
+        ...,
+        min_length=4,
+        max_length=4,
+        description="Exactly four options",
+    )
+
+    correct_option: int = Field(
+        ...,
+        ge=0,
+        le=3,
+        description="Index of the correct option, 0 to 3",
+    )
+
+    explanation: str = Field(
+        ...,
+        min_length=1,
+        description="Explanation of why the correct option is correct",
+    )
+
+
+
+
+class GeneratedQuiz(BaseModel):
+    questions: list[GeneratedQuizQuestion]
+
+
+
