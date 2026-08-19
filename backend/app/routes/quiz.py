@@ -2,8 +2,8 @@ import uuid
 
 from fastapi import APIRouter
 
-from app.schemas.quiz import QuizRequest, QuizResponse, QuizQuestion
-from app.services.quiz_service import generate_quiz
+from app.schemas.quiz import QuizRequest, QuizResponse, QuizQuestion, QuizSubmitResponse, QuizSubmitRequest
+from app.services.quiz_service import generate_quiz,submit_quiz
 from app.services.quiz_store import quiz_store
 
 
@@ -44,3 +44,9 @@ def create_quiz(request: QuizRequest):
         document_id=request.document_id,
         questions=questions,
     )
+
+
+@router.post("/submit",response_model=QuizSubmitResponse,)
+def submit_quiz_route(request: QuizSubmitRequest):
+
+    return submit_quiz(request)

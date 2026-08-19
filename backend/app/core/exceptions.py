@@ -28,3 +28,23 @@ class DocumentNotReadyException(AppException):
             message="Document is not ready for chat.",
             status_code=409,
         )
+
+
+class QuizNotFoundException(AppException):
+    def __init__(self, quiz_id: str):
+        super().__init__(
+            code="QUIZ_NOT_FOUND",
+            message=f"Quiz with id '{quiz_id}' not found",
+            status_code=404,
+        )
+
+
+class InvalidQuizQuestionException(AppException):
+    def __init__(self, question_id: int):
+        super().__init__(
+            code="INVALID_QUIZ_QUESTION",
+            message=f"Invalid question id '{question_id}'",
+            status_code=400,
+        )
+
+
