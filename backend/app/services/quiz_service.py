@@ -5,8 +5,8 @@ from app.rag.retriever import get_document_chunks
 from app.schemas.quiz import GeneratedQuiz
     # Get context from a specific PDF for quiz generation.
 
-
-def get_quiz_context(document_id: str, max_chunks: int = 20):
+# max_chunk size is reduced to 3 cause of model we have right now 
+def get_quiz_context(document_id: str, max_chunks: int = 3):
     """Get context from a specific PDF for quiz generation."""
 
     result = get_document_chunks(document_id)
