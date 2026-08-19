@@ -161,7 +161,12 @@ function DocumentsPage() {
                   >
                     Chat
                   </button>
-
+                  <button
+                    onClick={() => navigate(`/quiz/${document.document_id}`)}
+                    disabled={document.status !== "processed"}
+                  >
+                    Quiz
+                  </button>
                   <button
                     className="delete-button"
                     onClick={() => handleDelete(document.document_id)}

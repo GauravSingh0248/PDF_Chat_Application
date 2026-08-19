@@ -63,3 +63,51 @@ export async function chatWithDocument(documentId, question) {
 
   return response.json();
 }
+
+
+export async function generateQuiz(documentId, numberOfQuestions) {
+  const response = await fetch(`${API_BASE_URL}/api/quiz`, {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      document_id: documentId,
+      number_of_questions: numberOfQuestions,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error?.error?.message || "Failed to generate quiz.");
+  }
+
+  return response.json();
+}
+
+export async function submitQuiz(quizId, answers) {
+  const response = await fetch(`${API_BASE_URL}/api/quiz/submit`, {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      quiz_id: quizId,
+      answers: answers,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error?.error?.message || "Failed to submit quiz.");
+  }
+
+  return response.json();
+}
+

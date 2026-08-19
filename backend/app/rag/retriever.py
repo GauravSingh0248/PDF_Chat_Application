@@ -36,3 +36,17 @@ def get_retriever(document_id: str, k: int = 4):
     )
 
     return retriever
+
+
+def get_document_chunks(document_id: str):
+    
+
+    vector_store = get_vector_store()
+
+    result = vector_store._collection.get(
+        where={
+            "document_id": document_id
+        }
+    )
+
+    return result

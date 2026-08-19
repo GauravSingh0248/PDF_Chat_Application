@@ -5,6 +5,8 @@ from app.routes.document import router as document_router
 
 from app.core.exceptions import AppException
 
+from app.routes.quiz import router as quiz_router
+
 from app.core.exception_handlers import (
     app_exception_handler,
     global_exception_handler,
@@ -20,6 +22,7 @@ app = FastAPI(
 
 app.include_router(chat_router)
 app.include_router(document_router)
+app.include_router(quiz_router)
 
 app.add_exception_handler(
     AppException,
