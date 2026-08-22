@@ -1,4 +1,5 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 
 from app.rag.prompt import RAG_PROMPT
 from app.rag.retriever import get_retriever
@@ -13,11 +14,14 @@ def get_rag_chain(document_id: str):
         k=4,
     )
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-3.6-flash",
+    # llm = ChatGoogleGenerativeAI(
+    #     model="gemini-3.6-flash",
+    #     temperature=0,
+    # )
+    llm = ChatGroq(
+        model="openai/gpt-oss-20b",
         temperature=0,
     )
-
     return retriever, llm
 
 def ask_question(question: str, document_id: str,)-> ChatResponse:
@@ -60,6 +64,6 @@ def ask_question(question: str, document_id: str,)-> ChatResponse:
             )
 
     return ChatResponse(
-        answer=response.content[0]["text"],
+        answer=response.content,
         sources=sources,
     )
