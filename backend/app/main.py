@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from app.routes.chat import router as chat_router
 from app.routes.document import router as document_router
 from app.routes.notes import router as notes_router
+from app.routes.faq import router as faq_router
 
 from app.core.exceptions import AppException
 
@@ -25,6 +26,7 @@ app.include_router(chat_router)
 app.include_router(document_router)
 app.include_router(quiz_router)
 app.include_router(notes_router)
+app.include_router(faq_router)
 
 app.add_exception_handler(
     AppException,
