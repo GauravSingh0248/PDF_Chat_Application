@@ -46,7 +46,8 @@ def get_document_chunks(document_id: str):
     result = vector_store._collection.get(
         where={
             "document_id": document_id
-        }
+        },
+        include=["documents","metadatas"]
     )
 
     return result

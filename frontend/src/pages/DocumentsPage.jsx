@@ -168,6 +168,12 @@ function DocumentsPage() {
                     Quiz
                   </button>
                   <button
+                    onClick={() => navigate(`/notes/${document.document_id}`)}
+                    disabled={document.status !== "processed"}
+                  >
+                    Notes
+                  </button>
+                  <button
                     className="delete-button"
                     onClick={() => handleDelete(document.document_id)}
                   >

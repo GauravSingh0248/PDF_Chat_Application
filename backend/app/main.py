@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.routes.chat import router as chat_router
 from app.routes.document import router as document_router
+from app.routes.notes import router as notes_router
 
 from app.core.exceptions import AppException
 
@@ -23,6 +24,7 @@ app = FastAPI(
 app.include_router(chat_router)
 app.include_router(document_router)
 app.include_router(quiz_router)
+app.include_router(notes_router)
 
 app.add_exception_handler(
     AppException,
@@ -38,7 +40,7 @@ app.add_exception_handler(
 @app.get("/")
 def root():
     return {
-        "message": "Gaurav Portfolio API is running 🚀"
+        "message": "Gaurav PDF_CAHT_APPLICATIONN API is running 🚀"
     }
 
 

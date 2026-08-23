@@ -64,7 +64,6 @@ export async function chatWithDocument(documentId, question) {
   return response.json();
 }
 
-
 export async function generateQuiz(documentId, numberOfQuestions) {
   const response = await fetch(`${API_BASE_URL}/api/quiz`, {
     method: "POST",
@@ -111,3 +110,22 @@ export async function submitQuiz(quizId, answers) {
   return response.json();
 }
 
+export async function generateNotes(documentId) {
+  const response = await fetch(`${API_BASE_URL}/api/notes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      document_id: documentId,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error?.error?.message || "Failed to generate notes.");
+  }
+
+  return response.json();
+}
