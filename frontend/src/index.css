@@ -1224,9 +1224,32 @@ button {
   color: white;
 }
 
+.nav-text-link {
+  position: relative;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+
+  color: #777;
+
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.nav-text-link:hover {
+  color: white;
+}
+
 /* Small underline animation */
 
-.nav-links a::after {
+.nav-links a::after,
+.nav-text-link::after {
   content: "";
 
   position: absolute;
@@ -1244,7 +1267,8 @@ button {
   transition: width 0.2s ease;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-text-link:hover::after {
   width: 100%;
 }
 

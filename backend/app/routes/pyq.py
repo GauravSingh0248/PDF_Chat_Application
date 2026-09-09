@@ -1,19 +1,20 @@
 from fastapi import APIRouter
 
+from app.schemas.pyq import PYQAnalysis, PYQAnalysisRequest
 from app.services.pyq_service import analyze_pyq
-from app.schemas.pyq import PYQAnalysis
 
 
 router = APIRouter(
-    prefix="/pyq",
-    tags=["PYQ Intelligence"]
+    prefix="/api/pyq",
+    tags=["PYQ Intelligence"],
 )
 
 
-@router.get(
-    "/{document_id}/analysis",
-    response_model=PYQAnalysis
+@router.post(
+    "/analyze",
+    response_model=PYQAnalysis,
+    summary="Analyze multiple previous-year question papers together",
 )
-def get_pyq_analysis(document_id: str):
 
-    return analyze_pyq(document_id)
+def analyze_multiple_pyq_papers(request: PYQAnalysisRequest):
+    return analyze_pyq(request)

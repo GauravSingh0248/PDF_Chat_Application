@@ -39,7 +39,7 @@ def get_retriever(document_id: str, k: int = 4):
 
 
 def get_document_chunks(document_id: str):
-    
+    """Load all stored chunks for one document."""
 
     vector_store = get_vector_store()
 
@@ -47,7 +47,31 @@ def get_document_chunks(document_id: str):
         where={
             "document_id": document_id
         },
-        include=["documents","metadatas"]
+        include=["documents", "metadatas"],
+    )
+
+    return result
+
+
+def get_documents_chunks(document_ids: list[str]):
+    """Load all stored chunks for multiple documents."""
+
+    if not document_ids:
+        return {
+            "ids": [],
+            "documents": [],
+            "metadatas": [],
+        }
+
+    vector_store = get_vector_store()
+
+    result = vector_store._collection.get(
+        where={
+            "document_id": {
+                "$in": document_ids
+            }
+        },
+        include=["documents", "metadatas"],
     )
 
     return result

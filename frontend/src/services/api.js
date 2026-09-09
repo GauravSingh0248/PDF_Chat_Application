@@ -129,3 +129,26 @@ export async function generateNotes(documentId) {
 
   return response.json();
 }
+
+export async function analyzePyq(documentIds, subject) {
+  const response = await fetch(`${API_BASE_URL}/api/pyq/analyze`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      document_ids: documentIds,
+      subject: subject || null,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(
+      error?.error?.message || "Failed to analyze previous year questions.",
+    );
+  }
+
+  return response.json();
+}

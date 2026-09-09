@@ -6,6 +6,7 @@ import DocumentsPage from "./pages/DocumentsPage";
 import ChatPage from "./pages/ChatPage";
 import QuizPage from "./pages/QuizPage";
 import NotesPage from "./pages/NotesPage";
+import PyqPage from "./pages/PyqPage";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/quiz/:documentId" element={<QuizPage />} />
 
         <Route path="/notes/:documentId" element={<NotesPage />} />
+
+        <Route path="/pyq" element={<PyqPage />} />
       </Routes>
     </BrowserRouter>
   );

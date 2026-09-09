@@ -48,3 +48,34 @@ class InvalidQuizQuestionException(AppException):
         )
 
 
+class InsufficientPYQDocumentsException(AppException):
+    def __init__(self):
+        super().__init__(
+            code="INSUFFICIENT_PYQ_DOCUMENTS",
+            message=(
+                "PYQ analysis requires at least 2 processed previous-year "
+                "question papers."
+            ),
+            status_code=400,
+        )
+
+
+class DocumentContentNotFoundException(AppException):
+    def __init__(self, detail: str | None = None):
+        super().__init__(
+            code="DOCUMENT_CONTENT_NOT_FOUND",
+            message=detail or "No content found for the selected documents.",
+            status_code=404,
+        )
+
+
+class PYQAnalysisFailedException(AppException):
+    def __init__(self, detail: str | None = None):
+        super().__init__(
+            code="PYQ_ANALYSIS_FAILED",
+            message=detail
+            or "Failed to analyze previous year questions. Please try again.",
+            status_code=502,
+        )
+
+

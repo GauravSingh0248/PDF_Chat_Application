@@ -20,6 +20,14 @@ function LandingPage() {
           <a href="#how-it-works">How It Works</a>
 
           <a href="#about">About</a>
+
+          <button
+            type="button"
+            className="nav-text-link"
+            onClick={() => navigate("/pyq")}
+          >
+            PYQ Analysis
+          </button>
         </div>
 
         <button className="nav-start-button" onClick={handleStart}>
