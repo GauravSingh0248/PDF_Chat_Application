@@ -60,10 +60,6 @@ def _normalize_importance(value) -> str:
 
 
 def _normalize_analysis_payload(data: dict) -> dict:
-    """
-    Coerce common LLM field aliases into the PYQAnalysis schema.
-    gpt-oss often returns near-correct JSON with renamed keys.
-    """
 
     topics = []
     for topic in data.get("topics") or []:
@@ -258,8 +254,6 @@ def analyze_pyq(request: PYQAnalysisRequest) -> PYQAnalysis:
         else "Subject / exam focus: (not provided — infer from papers if clear)"
     )
 
-    # gpt-oss is a reasoning model: default max tokens often get spent on
-    # reasoning_content, leaving response.content empty (finish_reason=length).
     llm = ChatGroq(
         model="openai/gpt-oss-20b",
         temperature=0,
